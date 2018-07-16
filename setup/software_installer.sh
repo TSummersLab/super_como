@@ -29,15 +29,6 @@ rosversion ros || ./helper_scripts/install_ros_kinetic.sh # install ROS Kinetic 
 # Installing catkin_tools
 sudo apt-get install python-catkin-tools -y
 
-# Installing CUDA
-cuda_installation=1
-nvcc --version || cuda_installation=0
-if [ $cuda_installation = 0 ]
-then
-#    cd ~/Downloads
-    echo "Installing CUDA"
-fi
-
 # Insalling ZED SDK for TX2
 cd ~/super_como/setup/downloads
 #wget https://download.stereolabs.com/zedsdk/2.4/tegrax2
