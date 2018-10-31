@@ -1,0 +1,12 @@
+\subsubsection usage Usage
+\verbatim
+<node name="zed_wrapper" pkg="zed_wrapper" type="zed_wrapper">
+  <param name="confidence" type="int" value="80" />
+  <param name="exposure" type="int" value="100" />
+  <param name="gain" type="int" value="50" />
+  <param name="auto_exposure" type="bool" value="True" />
+  <param name="mat_resize_factor" type="double" value="1.0" />
+  <param name="max_depth" type="double" value="3.5" />
+</node>
+\endverbatim
+

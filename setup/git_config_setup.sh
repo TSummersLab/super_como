@@ -13,6 +13,6 @@ read email
 git config --global user.name "$username"
 git config --global user.email "$email"
 
-printf "git config global username and email are setup complete!\n"
+printf "git config global username and email set-up complete!\n"
 printf "\tUsername: $username\n"
 printf "\tEmail: $email\n"

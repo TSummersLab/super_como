@@ -30,4 +30,6 @@ sudo apt-get install ros-kinetic-visualization-msgs -y # visualization_msgs is a
 sudo apt-get install ros-kinetic-visualization-tutorials -y # Metapackage referencing tutorials related to rviz and visualization.
 sudo apt-get install ros-kinetic-xpp-quadrotor -y # The URDF file for a quadrotor to be used with the xpp packages and a simple rviz publisher of quadrotor tfs.
 
+# transformations
+sudo apt-get install ros-kinetic-tf2-geometry-msgs -y # Transformation bindings for tf library
 

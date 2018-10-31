@@ -1,0 +1,8 @@
+prefix=/home/nvidia/super_como/workspace/devel
+
+Name: zed_nodelet_example
+Description: Description of zed_nodelet_example
+Version: 2.6.0
+Cflags: 
+Libs: -L/home/nvidia/super_como/workspace/devel/lib 
+Requires: 
