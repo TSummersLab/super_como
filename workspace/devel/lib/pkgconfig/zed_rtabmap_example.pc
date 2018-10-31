@@ -1,8 +1,0 @@
-prefix=/home/nvidia/super_como/workspace/devel
-
-Name: zed_rtabmap_example
-Description: Description of zed_rtabmap_example
-Version: 2.6.0
-Cflags: 
-Libs: -L/home/nvidia/super_como/workspace/devel/lib 
-Requires: 

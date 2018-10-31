@@ -1,8 +1,0 @@
-prefix=/home/nvidia/super_como/workspace/devel
-
-Name: zed_video_sub_tutorial
-Description: Description of zed_video_sub_tutorial
-Version: 2.6.0
-Cflags: 
-Libs: -L/home/nvidia/super_como/workspace/devel/lib 
-Requires: 
