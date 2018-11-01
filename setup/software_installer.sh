@@ -3,17 +3,23 @@
 # Installs the following software on the Jetson TX2 
 # Nano
 # Pluma
+# Terminator (terminal application)
 # VLC
 # ROS Kinetic
 # ROS Kinetic packages
 # Catkin_tools
 # ZED SDK for TX2
 
+sudo apt-get update
+
 # Install nano text editor
 sudo apt-get install nano -y
 
 # Install Pluma text editor
 sudo apt-get install pluma -y
+
+# Install Terminator
+sudo apt-get install terminator -y
 
 # Install VLC
 sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
