@@ -7,7 +7,38 @@
 ROOT=$PWD
 
 # Get the ZED ROS wrapper 
-cd workspace/src/zed-ros-wrapper
+cd workspace/src/camera/zed/zed-ros-wrapper
+git submodule init
+git submodule update
+cd $ROOT
+
+# Get laser_proc 
+cd workspace/src/lidar/hokuyo/laser_proc
+git submodule init
+git submodule update
+cd $ROOT
+
+# Get urg_c 
+cd workspace/src/lidar/hokuyo/urg_c
+git submodule init
+git submodule update
+cd $ROOT
+
+# Get urg_node
+cd workspace/src/lidar/hokuyo/urg_node
+git submodule init
+git submodule update
+cd $ROOT
+
+# Get rp_lidar package
+cd workspace/src/lidar/rplidar/rplidar_ros
+git submodule init
+git submodule update
+cd $ROOT
+
+
+# Get razor_imu package
+cd workspace/src/imu/razor_imu_9dof
 git submodule init
 git submodule update
 cd $ROOT

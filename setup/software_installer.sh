@@ -42,7 +42,9 @@ wget https://www.stereolabs.com/developers/downloads/archives/ZED_SDK_Linux_JTX2
 chmod +x ZED_SDK_Linux_JTX2_v2.3.3_JP3.2.run
 ./ZED_SDK_Linux_JTX2_v2.3.3_JP3.2.run
 
+#installs python visiual (used for IMU)
+sudo apt-get python-visual -Y
 
-
-
+#installs arduino libraries
+sudo apt-get install arduino arduino-core -y
 

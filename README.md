@@ -52,6 +52,19 @@ After `software_installer.sh` has been executed correctly, you can run the `buil
 ./build.sh
 ```
 
+7. Source the workspace:
+Every time a new terminal window is open you have to source your workspace.
+```
+source ~/super_como/workspace/devel/setup.bash
+```
+Alternatively, you can add this to the bashrc file to avoid having to do that every time.
+```
+echo "source ~/super_como/workspace/devel/setup.bash" >> ~/.bashrc
+```
+Once this is performed you have to restart your terminal or source the bashrc file as follows:
+```
+source ~/.bashrc
+```
 
 
 

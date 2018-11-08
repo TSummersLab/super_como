@@ -1,3 +1,19 @@
 [submodule "workspace/src/zed-ros-wrapper"]
 	path = workspace/src/zed-ros-wrapper
 	url = https://github.com/stereolabs/zed-ros-wrapper.git
+
+[submodule "workspace/src/laser_proc"]
+	path = workspace/src/laser_proc
+	url = https://github.com/ros-perception/laser_proc.git
+[submodule "workspace/src/urg_c"]
+	path = workspace/src/urg_c
+	url = https://github.com/ros-drivers/urg_c.git
+[submodule "workspace/src/urg_node"]
+	path = workspace/src/urg_node
+	url = http://github.com/ros-drivers/urg_node.git
+[submodule "workspace/src/rplidar_ros"]
+	path = workspace/src/rplidar_ros
+	url = https://github.com/robopeak/rplidar_ros
+[submodule "workspace/src/razor_imu_9dof"]
+	path = workspace/src/razor_imu_9dof
+	url = https://github.com/KristofRobot/razor_imu_9dof
