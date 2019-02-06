@@ -47,3 +47,6 @@ sudo apt-get install ros-kinetic-libuvc-camera -y # USB Video Class camera drive
 sudo apt-get install ros-kinetic-libuvc-ros -y # libuvc_ros metapackage
 sudo apt-get install ros-kinetic-uvc-camera -y # A collection of node(let)s that stream images from USB cameras (UVC) and provide CameraInf
 
+#AMCL Ros navigation stack
+sudo apt-get install ros-kinetic-amcl -y
+
