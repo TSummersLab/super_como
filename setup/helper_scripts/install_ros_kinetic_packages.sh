@@ -33,3 +33,17 @@ sudo apt-get install ros-kinetic-xpp-quadrotor -y # The URDF file for a quadroto
 # transformations
 sudo apt-get install ros-kinetic-tf2-geometry-msgs -y # Transformation bindings for tf library
 
+# Ackermann
+sudo apt-get install ros-kinetic-ackermann-controller -y
+sudo apt-get install ros-kinetic-ackermann-msgs -y
+
+# Serial
+sudo apt-get install ros-kinetic-ackermann-serial -y
+sudo apt-get install ros-kinetic-ackermann-serial-utils -y
+
+# Camera drivers
+sudo apt-get install ros-kinetic-libuvc -y # USB Video Class driver library
+sudo apt-get install ros-kinetic-libuvc-camera -y # USB Video Class camera driver
+sudo apt-get install ros-kinetic-libuvc-ros -y # libuvc_ros metapackage
+sudo apt-get install ros-kinetic-uvc-camera -y # A collection of node(let)s that stream images from USB cameras (UVC) and provide CameraInf
+

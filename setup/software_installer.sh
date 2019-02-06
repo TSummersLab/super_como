@@ -9,6 +9,7 @@
 # ROS Kinetic packages
 # Catkin_tools
 # ZED SDK for TX2
+# V4L
 
 sudo apt-get update
 
@@ -47,4 +48,9 @@ sudo apt-get python-visual -Y
 
 #installs arduino libraries
 sudo apt-get install arduino arduino-core -y
+
+# Video for Linux (V4L)
+sudo apt-get install v4l-utils
+# if this does not run, rerun it after running the following:
+# sudo apt-get install -f
 
