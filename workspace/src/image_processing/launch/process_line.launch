@@ -1,0 +1,27 @@
+<!-- Sleiman Safaoui
+    June 26, 2018
+  -->
+
+<!-- Launch file to start cam_bridge.py, preprocess image, and processing the line -->
+
+<launch>
+
+	<!-- Start cam_bridge 
+	<node pkg="image_processing" type="elp_cam_bridge.py" name="elp_cam_bridge" output="screen" respawn="true">
+		<rosparam command="load" file="$(find image_processing)/config/cam_bridge_params.yml"/>
+	</node>-->
+
+	<!-- Start the image proprocessor-->
+	<node pkg="image_processing" type="img_preprocessing.py" name="img_preprocessing" output="screen" respawn="true">
+		<rosparam command="load" file="$(find image_processing)/config/img_preprocessing_params.yml"/>
+                <rosparam command="load" file="$(find image_processing)/config/zed_cam_params.yml"/>
+		<param name="path_to_corners" value="$(find image_processing)/config"/>
+	</node>
+
+	<!-- Start the line processor -->
+	<node pkg="image_processing" type="process_line.py" name="process_line" output="screen" respawn="true">
+		<rosparam command="load" file="$(find image_processing)/config/process_line_params.yml"/>
+		<param name="path_to_corners" value="$(find image_processing)/config"/>
+	</node>
+
+</launch>

@@ -1,0 +1,12 @@
+<!-- Sleiman Safaoui
+    June 26, 2018
+  -->
+
+<!-- Launch file to start cam_bridge.py  -->
+
+<launch>
+  <!-- Start cam_bridge -->
+  <node pkg="image_processing" type="elp_cam_bridge.py" name="elp_cam_bridge" output="screen" respawn="true">
+    <rosparam command="load" file="$(find image_processing)/config/elp_cam_bridge_params.yml"/>
+  </node>
+</launch>

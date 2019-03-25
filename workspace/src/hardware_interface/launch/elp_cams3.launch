@@ -1,0 +1,16 @@
+<launch>
+ <group ns="elp_cam3">
+  <node name="elp3" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/elp3" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="mjpeg" />
+    <param name="camera_frame_id" value="yuyv" />
+    <param name="io_method" value="mmap"/>
+  </node>
+  <node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/elp_cam3/elp3/image_raw"/>
+    <param name="autosize" value="true" />
+  </node>
+ </group>
+</launch>

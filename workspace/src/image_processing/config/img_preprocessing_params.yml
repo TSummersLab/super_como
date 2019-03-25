@@ -1,0 +1,4 @@
+CheckerboardParams:
+  num_internal_checkerboard_corners_horizontally: 7 # number of internal checkerboard corners along the horizontal side (longer)
+  num_internal_checkerboard_corners_vertically: 5 # number of internal checkerboard corners along the vertical side (shorter)
+

@@ -1,0 +1,14 @@
+imgMode: 'color' # 'color' or 'gray'
+
+#camPath: "/dev/camera/elp"
+
+resolution:
+  width: 672
+  height: 376
+
+framerate: 100
+
+
+# To find supported resolutions and framerates run the following in a terminal window:
+#  v4l2-ctl -d /dev/<dev_name> --list-formats-ext
+# where <dev_name> is your device e.g.: video6

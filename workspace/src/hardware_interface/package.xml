@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package>
+  <name>hardware_interface</name>
+  <version>0.0.1</version>
+  <description>SuperCOMO hardware interface files</description>
+
+  <author>Sleiman Safaoui</author>
+  <maintainer email="snsafaoui@gmail.com">Sleiman Safaoui</maintainer>
+  <license>MIT</license>
+
+  <!-- <url type="website">http://wiki.ros.org/pwm_sysfs_driver</url> -->
+
+  <!-- <author email="jane.doe@example.com">Jane Doe</author> -->
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>std_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+
+  <run_depend>razor_imu_9dof</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>tf2_ros</run_depend>
+  <run_depend>urg_node</run_depend>
+  <run_depend>joy</run_depend>
+  <run_depend>rosbag</run_depend>
+  <run_depend>rostopic</run_depend>
+  <run_depend>rviz</run_depend>
+
+
+  <!-- mapping -->
+  <run_depend>gmapping</run_depend>
+  <run_depend>hector_mapping</run_depend>
+  <run_depend>robot_pose_ekf</run_depend>
+
+  <run_depend>std_msgs</run_depend>
+  <run_depend>message_runtime</run_depend>
+
+  <export>
+  </export>
+</package>
