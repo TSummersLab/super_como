@@ -10,13 +10,13 @@ from ackermann_msgs.msg import AckermannDriveStamped as ADS
 
 
 # TO BE MOVED TO A CONFIG FILE
-heading_ctrl_Kp= 7.0
+heading_ctrl_Kp= 5.0
 heading_ctrl_ctrl_max= 90.0
 heading_ctrl_ctrl_min= -90.0
 
-lateral_ctrl_Kp= 300.#5.2795
-lateral_ctrl_Ki= 20.#.1#155.748968
-lateral_ctrl_Kd= 20.#.03#3.025
+lateral_ctrl_Kp= 135.# was 150
+lateral_ctrl_Ki= 0.#was 10
+lateral_ctrl_Kd= 10.#was 10
 
 lateral_ctrl_i_max= 10.0
 lateral_ctrl_i_min= -10.0
@@ -103,7 +103,7 @@ class LineFollower:
 	Finds the steering angle for the car to follow a line based on /line_data (line heading and offset of car from line)
 	'''
 	def __init__(self):
-		self.motor = 1.0
+		self.motor = 0.85
 		self.heading_ctrl = []
 		self.servo = []
 		self.angle_radian = [] # that should be executed
@@ -130,7 +130,7 @@ class LineFollower:
 			return
 		#print('Calculating ctrl')
 		heading_ctrl = heading_ctrl.apply_pid(self.angle_degree, 90.0 , timestamp) # desired is angle of line, and current is always 90
-		lateral_ctrl = lateral_ctrl.apply_pid(0.065, self.line_pos_x, timestamp)
+		lateral_ctrl = lateral_ctrl.apply_pid(0.08, self.line_pos_x, timestamp)
 		ctrl = 0.0*heading_ctrl + 1.0*lateral_ctrl
 		ctrl = -ctrl # add offset to remap ctrl from [-90, 90] to [0, 180]
 		print('heading_ctrl', heading_ctrl)

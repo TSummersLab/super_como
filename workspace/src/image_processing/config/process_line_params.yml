@@ -2,7 +2,7 @@ LineSub:
   topic_name: '/cam/line_img' # topic which contains line image
 
 LineParams:
-  threshold: 170 # threashold for binarizing the image
+  threshold: 160 #170 # threashold for binarizing the image
   width_of_line: 50 # estimate for width of line
   width_gain: 0.75 # percentage of the width_of_line to be used in calculating estimate for area and perimeter of the line
 

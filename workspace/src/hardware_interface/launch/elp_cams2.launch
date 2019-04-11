@@ -1,7 +1,7 @@
 <launch>
  <group ns="elp_cam1">
   <node name="elp1" pkg="usb_cam" type="usb_cam_node" output="screen" >
-    <param name="video_device" value="/dev/video3" />
+    <param name="video_device" value="/dev/elp1" />
     <param name="image_width" value="640" />
     <param name="image_height" value="480" />
     <param name="pixel_format" value="mjpeg" />
@@ -17,7 +17,7 @@
 
  <group ns="elp_cam2">
   <node name="elp2" pkg="usb_cam" type="usb_cam_node" output="screen" >
-    <param name="video_device" value="/dev/video1" />
+    <param name="video_device" value="/dev/elp2" />
     <param name="image_width" value="640" />
     <param name="image_height" value="480" />
     <param name="pixel_format" value="mjpeg" />
@@ -30,9 +30,9 @@
   </node>
  </group>
  
- <group ns="elp_cam3">
+ <!--<group ns="elp_cam3">
   <node name="elp3" pkg="usb_cam" type="usb_cam_node" output="screen" >
-    <param name="video_device" value="/dev/video2" />
+    <param name="video_device" value="/dev/elp3" />
     <param name="image_width" value="640" />
     <param name="image_height" value="480" />
     <param name="pixel_format" value="mjpeg" />
@@ -43,5 +43,5 @@
     <remap from="image" to="/elp_cam3/elp3/image_raw"/>
     <param name="autosize" value="true" />
   </node>
- </group>
+ </group> -->
 </launch>

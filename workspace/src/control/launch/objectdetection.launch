@@ -1,0 +1,13 @@
+<!-- Sleiman Safaoui
+    Feb 15, 2019
+  -->
+
+
+<launch>
+
+	
+	<!-- Start the high-level controller for line follower -->
+	<node pkg="control" type="HallNavwithObjDet.py" name="HallNavwithObjDet" output="screen"/>
+        
+</launch>
+

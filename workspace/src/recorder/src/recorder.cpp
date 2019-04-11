@@ -62,9 +62,6 @@ int main(int argc, char** argv){
     ros::Rate rate(30.0) ;
     
     
-    //VideoWriter video("scomo.avi",CV_FOURCC('M','J','P','G'),30, Size(1280,720)); // hd res at 30 fps
-    //VideoWriter video("scomo.avi",CV_FOURCC('M','J','P','G'),30, Size(672,376));
-
     ros::Subscriber imu_sub = n.subscribe("imu", 1, imuCallback); // subscribes to the imu and start the callback function
     ros::Subscriber sub_scanner = n.subscribe<sensor_msgs::LaserScan>("scan", 1, scanCallback); // subscribes to the lidar and start the callback function
     ros::Subscriber subRightRaw = n.subscribe("/zed/right/image_raw_color", 10, imageRightRectifiedCallback); 
@@ -79,16 +76,7 @@ int main(int argc, char** argv){
        bag.write("zed/right/image_raw_color", ros::Time::now(), msgr);
        ROS_INFO("recording data...");
        
-       // ROS_INFO("encoding: %s \n", msgr.encoding);
-       //create and save images
-       // cv_ptr = cv_bridge::toCvCopy(msgr, msgr.encoding); //create a open CV 
-       // ROS_INFO("recording data...");
-       
-       //cv_ptr->image.copyTo(save_img);
-       // ROS_INFO("recording data...");
-       
-       //ROS_INFO("%.d \n",save_img.size());
-        //video.write(save_img);
+
        
         ros::spinOnce();
         rate.sleep();     
