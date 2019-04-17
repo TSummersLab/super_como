@@ -11,4 +11,4 @@ PlottingParams:
 
 CheckerboardParams:
   square_size: 0.028 # size of a side of a checkerboard square in meters
-  car_body_frame_to_board: 0.25 # distance between the origin of the body frame of the car and the bottom side of the calibration board
+  car_body_frame_to_board: 0.40 # distance between the origin of the body frame of the car and the bottom side of the calibration board in meters

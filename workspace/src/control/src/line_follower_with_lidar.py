@@ -149,7 +149,7 @@ class LineFollower:
             return
         #print('Calculating ctrl')
         heading_ctrl = heading_ctrl.apply_pid(self.angle_degree, 90.0 , timestamp) # desired is angle of line, and current is always 90
-        lateral_ctrl = lateral_ctrl.apply_pid(0.08, self.line_pos_x, timestamp)
+        lateral_ctrl = lateral_ctrl.apply_pid(0.0, self.line_pos_x, timestamp)
         ctrl = 0.0*heading_ctrl + 1.0*lateral_ctrl
         ctrl = -ctrl # add offset to remap ctrl from [-90, 90] to [0, 180]
         print('heading_ctrl', heading_ctrl)

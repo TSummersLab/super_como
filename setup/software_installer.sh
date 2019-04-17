@@ -54,3 +54,9 @@ sudo apt-get install v4l-utils
 # if this does not run, rerun it after running the following:
 # sudo apt-get install -f
 
+# install Yolo and Darknet for object detection 
+cd catkin_workspace/src
+git clone --recursive git@github.com:leggedrobotics/darknet_ros.git
+cd ../
+
+catkin_make -DCMAKE_BUILD_TYPE=Release
