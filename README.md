@@ -28,31 +28,31 @@ Configure git either manually or by running `git_config_setup.sh`. You can run t
 ./git_config_setup.sh
 ```
 
-5. Run the software installer:
-Run the installer as follows:
+5. Run the following scripts:
 ```
-./software_installer.sh
-```
-Running the installer for the first time downloads and installs many packages, so it takes a while. Most of the script is automated and will not require user input until the very end when the ZED SDK is installed. For that installation, which is part of `software_installer.sh`, follow the instructions that appear in the terminal window.
+sudo ./install_programs.sh
 
-By the end of the installation process, you will have the following packages and programs installed or updated:
-* Nano
-* Pluma
-* Terminator
-* VLC
-* ROS Kinetic bare-bones 
-* Certain ROS Kinetic packages for ARM architeture (the packages are listed in `super_como/setup/helper_scripts/install_ros_kinetic_packages.sh`
-* Catkin_tools
-* ZED SDK 2.3.3
+sudo ./install_ros.sh
 
-6. Run the build script:
-The `build.sh` script at the root of the super_como package builds the catkin workspace.
-After `software_installer.sh` has been executed correctly, you can run the `build.sh` script. In a terminal window, navigate to the root of the super_como package then run the following command:
+sudo ./install_zed_sdk.sh
 ```
+
+6. Setup the device rules:
+Run the rules set up script:
+```
+sudo ./rules_setup.sh
+```
+
+This script will reload the rules, but we recommend restarting the machine to ensure that the rules are in effect.
+
+7. Run the build script:
+The `build.sh` script at the root of the super_como package builds the catkin workspace. In a terminal window, navigate to the root of the super_como package then run the following command:
+```
+cd ~/super_como
 ./build.sh
 ```
 
-7. Source the workspace:
+8. Source the workspace:
 Every time a new terminal window is open you have to source your workspace.
 ```
 source ~/super_como/workspace/devel/setup.bash

@@ -49,3 +49,10 @@ cd workspace
 catkin_make -DCMAKE_BUILD_TYPE=RelWithDebInfo -k
 catkin_make
 cd $ROOT 
+
+
+## install Yolo and Darknet for object detection 
+#cd catkin_workspace/src
+#git clone --recursive git@github.com:leggedrobotics/darknet_ros.git
+#cd ../
+#catkin_make -DCMAKE_BUILD_TYPE=Release
