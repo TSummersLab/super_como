@@ -30,14 +30,20 @@ Configure git either manually or by running `git_config_setup.sh`. You can run t
 
 5. Run the following scripts:
 ```
-sudo ./install_programs.sh
+./install_programs.sh
 
-sudo ./install_ros.sh
+./install_ros.sh
 
-sudo ./install_zed_sdk.sh
 ```
 
-6. Setup the device rules:
+6. Download and install the ZED SDK:
+- Go to the [ZED downloads](https://www.stereolabs.com/developers/release/#sdkdownloads_anchor) website and download the [ZED SDK for Jetson TX2 with JetPack 3.2 and CUDA 9](https://download.stereolabs.com/zedsdk/2.7/tegrax2).
+
+- Once it downloads, either used `chmod +x <file_name>` to make the file and executable or right click it --> permissions --> allow executing file as a program.
+
+- Run the script by `cd` to file location in a terminal and typing `./` followed by the file name.
+
+7. Setup the device rules:
 Run the rules set up script:
 ```
 sudo ./rules_setup.sh
@@ -45,14 +51,14 @@ sudo ./rules_setup.sh
 
 This script will reload the rules, but we recommend restarting the machine to ensure that the rules are in effect.
 
-7. Run the build script:
+8. Run the build script:
 The `build.sh` script at the root of the super_como package builds the catkin workspace. In a terminal window, navigate to the root of the super_como package then run the following command:
 ```
 cd ~/super_como
 ./build.sh
 ```
 
-8. Source the workspace:
+9. Source the workspace:
 Every time a new terminal window is open you have to source your workspace.
 ```
 source ~/super_como/workspace/devel/setup.bash

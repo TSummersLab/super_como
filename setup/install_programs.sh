@@ -23,13 +23,13 @@ sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)
 sudo apt-get install vlc -y
 
 #installs python visiual (used for IMU)
-sudo apt-get python-visual -Y
+sudo apt-get install python-visual -y
 
 #installs arduino libraries
 sudo apt-get install arduino arduino-core -y
 
 # Video for Linux (V4L)
-sudo apt-get install v4l-utils
+sudo apt-get install v4l-utils -y
 # if this does not run, rerun it after running the following:
 # sudo apt-get install -f
 
