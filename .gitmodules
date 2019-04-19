@@ -23,3 +23,6 @@
 [submodule "workspace/src/vesc"]
 	path = workspace/src/vesc
 	url = https://github.com/mit-racecar/vesc
+[submodule "workspace/src/darknet_ros"]
+	path = workspace/src/darknet_ros
+	url = https://github.com/leggedrobotics/darknet_ros.git

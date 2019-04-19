@@ -40,16 +40,21 @@ git submodule init
 git submodule update
 cd $ROOT
 
-
 # Get razor_imu package
 cd workspace/src/razor_imu_9dof
 git submodule init
 git submodule update
 cd $ROOT
 
+# Get darknet_ros package
+cd workspace/src/darknet_ros
+git submodule init
+git submodule update
+cd $ROOT
 
 # build the workspace
 cd workspace
+catkin_make -DCMAKE_BUILD_TYPE=Release -k
 #catkin_make -DCMAKE_BUILD_TYPE=RelWithDebInfo -k
 catkin_make
 cd $ROOT 

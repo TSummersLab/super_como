@@ -90,9 +90,9 @@ catkin_package(
     rosbag
     rostopic
     rviz
-    gmapping
-    hector_mapping
-    robot_pose_ekf
+    #gmapping
+    #hector_mapping
+    #robot_pose_ekf
     std_msgs
     message_runtime
 #  DEPENDS system_lib

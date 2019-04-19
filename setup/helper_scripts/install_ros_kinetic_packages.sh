@@ -37,7 +37,7 @@ sudo apt-get install ros-kinetic-tf2-geometry-msgs -y # Transformation bindings 
 sudo apt-get install ros-kinetic-ackermann-controller -y
 sudo apt-get install ros-kinetic-ackermann-msgs -y
 
-# Serial
+# Ackermann Serial
 sudo apt-get install ros-kinetic-ackermann-serial -y
 sudo apt-get install ros-kinetic-ackermann-serial-utils -y
 
@@ -50,4 +50,22 @@ sudo apt-get install ros-kinetic-usb-cam -y # for V4L USB camera devices
 
 #AMCL Ros navigation stack
 sudo apt-get install ros-kinetic-amcl -y
+
+# serial 
+sudo apt-get install ros-kinetic-serial -y
+sudo apt-get install ros-kinetic-serial-utils -y
+
+# Rosserial and arduino 
+sudo apt-get install ros-kinetic-rosserial -y
+sudo apt-get install ros-kinetic-rosserial-arduino -y
+sudo apt-get install ros-kinetic-rosserial-python -y
+
+
+
+
+
+
+
+
+
 
