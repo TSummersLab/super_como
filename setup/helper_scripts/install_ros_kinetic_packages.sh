@@ -60,6 +60,8 @@ sudo apt-get install ros-kinetic-rosserial -y
 sudo apt-get install ros-kinetic-rosserial-arduino -y
 sudo apt-get install ros-kinetic-rosserial-python -y
 
+# image view
+sudo apt-get install ros-kinetic-image-view -y
 
 
 

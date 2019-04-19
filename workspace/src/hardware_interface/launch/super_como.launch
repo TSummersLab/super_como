@@ -1,0 +1,84 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+	<!-- configuration files -->
+	<arg name="elp_front" default="true" />
+	<arg name="elp_back" default="false" />
+	<arg name="elp_right" default="false" />
+	<arg name="elp_left" default="false" />
+	<arg name="zed" default="true" />
+	<arg name="hokuyo" default="true" />
+	<arg name="teensy" default="true" />
+	<arg name="imu" default="true" />
+
+
+
+  <arg name="racecar_version" default="racecar-v2" />
+  <arg name="run_camera" default="true"/>
+  <arg name="razor_config_file" default="$(find razor_imu_9dof)/config/my_razor.yaml"/>
+
+  <include file="$(find racecar)/launch/includes/$(arg racecar_version)-teleop.launch.xml">
+    <arg name="racecar_version" value="$(arg racecar_version)" />
+    <arg name="run_camera" value="$(arg run_camera)" />
+  </include>
+
+<!-- -*- imu -*-  -->
+  	<node pkg="razor_imu_9dof" type="display_3D_visualization.py" name="display_3D_visualization_node" output="screen">
+  
+  	</node>
+
+
+
+
+
+<!-- -*- ZED -*- -->
+    <arg name="svo_file"              default="" /> <!-- <arg name="svo_file" default="path/to/svo/file.svo"> -->
+
+    <arg name="camera_model"         default="1" /> <!-- 0=ZED, 1=ZEDM-->
+    <arg name="serial_number"        default="0" />
+    <arg name="verbose"              default="true" />
+    <arg name="resolution"           default="3" /> <!--0=RESOLUTION_HD2K, 1=RESOLUTION_HD1080, 2=RESOLUTION_HD720, 3=RESOLUTION_VGA -->
+    <arg name="frame_rate"           default="30" />
+    <!-- RESOLUTION_HD2K   -> 2208*1242, available framerates: 15 fps.
+         RESOLUTION_HD1080 -> 1920*1080, available framerates: 15, 30 fps.
+         RESOLUTION_HD720  -> 1280*720,  available framerates: 15, 30, 60 fps.
+         RESOLUTION_VGA    -> 672*376,   available framerates: 15, 30, 60, 100 fps. -->
+
+    <!-- Coordinate frame -->
+    <arg name="pose_frame"           default="map" />
+    <arg name="odometry_frame"       default="odom" />
+    <arg name="two_d_mode"           default="false" /> <!-- if true the Z value will be fixed to "fixed_z_value", roll and pitch to zero -->
+    <arg name="fixed_z_value"        default="0.0" />
+
+    <group ns="zed">
+        <include file="$(find zed_wrapper)/launch/zed_camera.launch">
+            <arg name="svo_file"            value="$(arg svo_file)" />
+            <arg name="pose_frame"          value="$(arg pose_frame)" />
+            <arg name="odometry_frame"      value="$(arg odometry_frame)" />
+            <arg name="camera_model"        value="$(arg camera_model)" />
+            <arg name="serial_number"       value="$(arg serial_number)" />
+            <arg name="resolution"          value="$(arg resolution)" />
+            <arg name="frame_rate"          value="$(arg frame_rate)" />
+            <arg name="verbose"             value="$(arg verbose)" />
+            <arg name="two_d_mode"          value="$(arg two_d_mode)" />
+            <arg name="fixed_z_value"       value="$(arg fixed_z_value)" />
+        </include>
+    </group>
+
+
+<group ns="elp_cam_front" if="$(arg elp_front)">
+<node name="elp_front" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/elp/front" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="mjpeg" />
+    <param name="camera_frame_id" value="yuyv" />
+    <param name="io_method" value="mmap"/>
+  </node>
+  <node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/elp_cam_front/elp_front/image_raw"/>
+    <param name="autosize" value="true" />
+  </node>
+</group>
+
+
+</launch>
