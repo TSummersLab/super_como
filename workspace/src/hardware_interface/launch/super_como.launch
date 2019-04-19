@@ -1,81 +1,203 @@
 <!-- -*- mode: XML -*- -->
 <launch>
-	<!-- configuration files -->
-	<arg name="elp_front" default="true" />
-	<arg name="elp_back" default="false" />
-	<arg name="elp_right" default="false" />
-	<arg name="elp_left" default="false" />
-	<arg name="zed" default="true" />
-	<arg name="hokuyo" default="true" />
-	<arg name="teensy" default="true" />
-	<arg name="imu" default="true" />
 
-
-
-  <arg name="racecar_version" default="racecar-v2" />
-  <arg name="run_camera" default="true"/>
-  <arg name="razor_config_file" default="$(find razor_imu_9dof)/config/my_razor.yaml"/>
-
-  <include file="$(find racecar)/launch/includes/$(arg racecar_version)-teleop.launch.xml">
-    <arg name="racecar_version" value="$(arg racecar_version)" />
-    <arg name="run_camera" value="$(arg run_camera)" />
-  </include>
-
-<!-- -*- imu -*-  -->
-  	<node pkg="razor_imu_9dof" type="display_3D_visualization.py" name="display_3D_visualization_node" output="screen">
-  
-  	</node>
-
-
-
-
-
-<!-- -*- ZED -*- -->
-    <arg name="svo_file"              default="" /> <!-- <arg name="svo_file" default="path/to/svo/file.svo"> -->
-
-    <arg name="camera_model"         default="1" /> <!-- 0=ZED, 1=ZEDM-->
-    <arg name="serial_number"        default="0" />
-    <arg name="verbose"              default="true" />
-    <arg name="resolution"           default="3" /> <!--0=RESOLUTION_HD2K, 1=RESOLUTION_HD1080, 2=RESOLUTION_HD720, 3=RESOLUTION_VGA -->
-    <arg name="frame_rate"           default="30" />
+<!-- -*- configuration args -*- -->
+	<!-- elp cameras -->
+	<arg name="usb_cam" default="false" /> <!-- usb or uvc camera driver, choose one -->
+	<arg name="uvc_cam" default="true" /> <!-- usb or uvc camera driver, choose one -->
+	<arg name="show_vid" default="false" /> <!-- show elp camera video using image view -->
+	<arg name="elp_front" default="false" /> <!-- front elp camera --> <!-- set to true --> 
+	<arg name="elp_back" default="false" /> <!-- back elp camera -->
+	<arg name="elp_right" default="false" /> <!-- right elp camera -->
+	<arg name="elp_left" default="false" /> <!-- left elp camera -->
+	<!-- hokuyo lidar -->
+	<arg name="hokuyo" default="true" /> <!-- hokuyo lidar -->
+	<!-- teensy circuit -->	
+	<arg name="teensy" default="false" /> <!-- teensy circuit -->
+	<!-- imu -->	
+	<arg name="imu" default="true" /> <!-- imu -->
+	<arg name="imu_visualize" default="false"/> <!-- visualize imu -->
+	<!-- zed camera -->
+	<arg name="zed" default="false" />  <!-- zed camera --> <!-- set to true -->
+	<arg name="svo_file"              default="" /> <!-- <arg name="svo_file" default="path/to/svo/file.svo"> -->
+  <arg name="camera_model"         default="1" /> <!-- 0=ZED, 1=ZEDM-->
+  <arg name="serial_number"        default="0" />
+  <arg name="verbose"              default="true" />
+  <arg name="resolution"           default="3" /> <!--0=RESOLUTION_HD2K, 1=RESOLUTION_HD1080, 2=RESOLUTION_HD720, 3=RESOLUTION_VGA -->
+  <arg name="frame_rate"           default="30" />
     <!-- RESOLUTION_HD2K   -> 2208*1242, available framerates: 15 fps.
          RESOLUTION_HD1080 -> 1920*1080, available framerates: 15, 30 fps.
          RESOLUTION_HD720  -> 1280*720,  available framerates: 15, 30, 60 fps.
          RESOLUTION_VGA    -> 672*376,   available framerates: 15, 30, 60, 100 fps. -->
 
-    <!-- Coordinate frame -->
-    <arg name="pose_frame"           default="map" />
-    <arg name="odometry_frame"       default="odom" />
-    <arg name="two_d_mode"           default="false" /> <!-- if true the Z value will be fixed to "fixed_z_value", roll and pitch to zero -->
-    <arg name="fixed_z_value"        default="0.0" />
-
-    <group ns="zed">
-        <include file="$(find zed_wrapper)/launch/zed_camera.launch">
-            <arg name="svo_file"            value="$(arg svo_file)" />
-            <arg name="pose_frame"          value="$(arg pose_frame)" />
-            <arg name="odometry_frame"      value="$(arg odometry_frame)" />
-            <arg name="camera_model"        value="$(arg camera_model)" />
-            <arg name="serial_number"       value="$(arg serial_number)" />
-            <arg name="resolution"          value="$(arg resolution)" />
-            <arg name="frame_rate"          value="$(arg frame_rate)" />
-            <arg name="verbose"             value="$(arg verbose)" />
-            <arg name="two_d_mode"          value="$(arg two_d_mode)" />
-            <arg name="fixed_z_value"       value="$(arg fixed_z_value)" />
-        </include>
-    </group>
+		<!-- Coordinate frame (ZED)-->
+  <arg name="pose_frame"           default="map" />
+  <arg name="odometry_frame"       default="odom" />
+  <arg name="two_d_mode"           default="false" /> <!-- if true the Z value will be fixed to "fixed_z_value", roll and pitch to zero -->
+  <arg name="fixed_z_value"        default="0.0" />
+	<!-- racecar -->
+  <arg name="racecar_version" default="racecar-v2" />
+  <arg name="run_camera" default="true"/>
+  <arg name="razor_config_file" default="$(find razor_imu_9dof)/config/my_razor.yaml"/>
+  <include file="$(find racecar)/launch/includes/$(arg racecar_version)-teleop.launch.xml">
+    <arg name="racecar_version" value="$(arg racecar_version)" />
+    <arg name="run_camera" value="$(arg run_camera)" />
+  </include>
+	
 
 
-<group ns="elp_cam_front" if="$(arg elp_front)">
-<node name="elp_front" pkg="usb_cam" type="usb_cam_node" output="screen" >
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- -*- imu -*- -->
+<node if="$(eval imu and imu_visualize)" pkg="razor_imu_9dof" type="display_3D_visualization.py" name="display_3D_visualization_node" output="screen">
+</node>
+<!--<node pkg="razor_imu_9dof" type="imu_node.py" name="imu_node" output="screen">
+</node>--> <!-- fix this to support stopping imu -->
+
+
+
+<!-- -*- Teensy -*- -->
+<group if="$(arg teensy)" ns="teensy">
+	<node name="teensy" pkg="rosserial_python" type="serial_node.py" output="screen">
+		<param name="port" value="/dev/teensy"/>
+	</node>
+</group>
+
+
+
+<!-- -*- ZED -*- -->
+<group if="$(arg zed)" ns="zed">
+	<include file="$(find zed_wrapper)/launch/zed_camera.launch">
+		<arg name="svo_file"            value="$(arg svo_file)" />
+		<arg name="pose_frame"          value="$(arg pose_frame)" />
+		<arg name="odometry_frame"      value="$(arg odometry_frame)" />
+		<arg name="camera_model"        value="$(arg camera_model)" />
+		<arg name="serial_number"       value="$(arg serial_number)" />
+		<arg name="resolution"          value="$(arg resolution)" />
+		<arg name="frame_rate"          value="$(arg frame_rate)" />
+		<arg name="verbose"             value="$(arg verbose)" />
+		<arg name="two_d_mode"          value="$(arg two_d_mode)" />
+		<arg name="fixed_z_value"       value="$(arg fixed_z_value)" />
+	</include>
+</group>
+
+
+
+<!-- -*- ELP cameras -*-  -->
+<!-- Front ELP -->
+<group ns="elp_cam_front" if="$(eval elp_front and usb_cam)">
+	<node name="elp_front" pkg="usb_cam" type="usb_cam_node" output="screen" >
     <param name="video_device" value="/dev/elp/front" />
     <param name="image_width" value="640" />
     <param name="image_height" value="480" />
     <param name="pixel_format" value="mjpeg" />
     <param name="camera_frame_id" value="yuyv" />
     <param name="io_method" value="mmap"/>
+		<param name="framerate" value="30"/>
   </node>
-  <node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+	<node if="$(arg show_vid)" name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
     <remap from="image" to="/elp_cam_front/elp_front/image_raw"/>
+    <param name="autosize" value="true" /> 
+  </node>
+</group>
+<group ns="elp_cam_front" if="$(eval elp_front and uvc_cam)">
+	<node pkg="uvc_camera" type="uvc_camera_node" name="elp_front" output="screen" >
+		<param name="width" type="int" value="640" />
+		<param name="height" type="int" value="480" />
+		<param name="fps" type="int" value="30" />
+		<param name="frame" type="string" value="wide_stereo" />
+		<param name="device" type="string" value="/dev/elp/front" />
+	</node>
+  <node if="$(arg show_vid)" name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/elp_cam_front/image_raw"/>
+    <param name="autosize" value="true" />
+  </node>
+</group>
+<!-- Back ELP -->
+<group ns="elp_cam_back" if="$(eval elp_back and usb_cam)">
+	<node name="elp_back" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/elp/back" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="mjpeg" />
+    <param name="camera_frame_id" value="yuyv" />
+    <param name="io_method" value="mmap"/>
+		<param name="framerate" value="30"/>
+  </node>
+	<node if="$(arg show_vid)" name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/elp_cam_back/elp_back/image_raw"/>
+    <param name="autosize" value="true" /> 
+  </node>
+</group>
+<group ns="elp_cam_back" if="$(eval elp_back and uvc_cam)">
+	<node pkg="uvc_camera" type="uvc_camera_node" name="elp_back" output="screen" >
+		<param name="width" type="int" value="640" />
+		<param name="height" type="int" value="480" />
+		<param name="fps" type="int" value="30" />
+		<param name="frame" type="string" value="wide_stereo" />
+		<param name="device" type="string" value="/dev/elp/back" />
+	</node>
+  <node if="$(arg show_vid)" name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/elp_cam_back/image_raw"/>
+    <param name="autosize" value="true" />
+  </node>
+</group>
+<!-- Right ELP -->
+<group ns="elp_cam_right" if="$(eval elp_right and usb_cam)">
+	<node name="elp_right" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/elp/right" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="mjpeg" />
+    <param name="camera_frame_id" value="yuyv" />
+    <param name="io_method" value="mmap"/>
+		<param name="framerate" value="30"/>
+  </node>
+	<node if="$(arg show_vid)" name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/elp_cam_right/elp_right/image_raw"/>
+    <param name="autosize" value="true" /> 
+  </node>
+</group>
+<group ns="elp_cam_right" if="$(eval elp_right and uvc_cam)">
+	<node pkg="uvc_camera" type="uvc_camera_node" name="elp_right" output="screen" >
+		<param name="width" type="int" value="640" />
+		<param name="height" type="int" value="480" />
+		<param name="fps" type="int" value="30" />
+		<param name="frame" type="string" value="wide_stereo" />
+		<param name="device" type="string" value="/dev/elp/right" />
+	</node>
+  <node if="$(arg show_vid)" name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/elp_cam_right/image_raw"/>
+    <param name="autosize" value="true" />
+  </node>
+</group>
+<!-- Left ELP -->
+<group ns="elp_cam_left" if="$(eval elp_left and usb_cam)">
+	<node name="elp_left" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/elp/left" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="mjpeg" />
+    <param name="camera_frame_id" value="yuyv" />
+    <param name="io_method" value="mmap"/>
+		<param name="framerate" value="30"/>
+  </node>
+	<node if="$(arg show_vid)" name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/elp_cam_left/elp_left/image_raw"/>
+    <param name="autosize" value="true" /> 
+  </node>
+</group>
+<group ns="elp_cam_left" if="$(eval elp_left and uvc_cam)">
+	<node pkg="uvc_camera" type="uvc_camera_node" name="elp_left" output="screen" >
+		<param name="width" type="int" value="640" />
+		<param name="height" type="int" value="480" />
+		<param name="fps" type="int" value="30" />
+		<param name="frame" type="string" value="wide_stereo" />
+		<param name="device" type="string" value="/dev/elp/left" />
+	</node>
+  <node if="$(arg show_vid)" name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/elp_cam_left/image_raw"/>
     <param name="autosize" value="true" />
   </node>
 </group>
