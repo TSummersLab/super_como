@@ -123,7 +123,7 @@ In `~/super_como/workspace/src/darknet_ros/darknet_ros/config/ros.yaml` change t
 
 - Setting up team viewer
 - Setting up optional Bluetooth Xbox one controller script
-
+- bldc tool download, install, and programming vesc
 
 
 
