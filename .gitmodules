@@ -26,3 +26,6 @@
 [submodule "workspace/src/darknet_ros"]
 	path = workspace/src/darknet_ros
 	url = https://github.com/leggedrobotics/darknet_ros.git
+[submodule "workspace/src/nmea_navsat_driver"]
+	path = workspace/src/nmea_navsat_driver
+	url = https://github.com/ros-drivers/nmea_navsat_driver.git

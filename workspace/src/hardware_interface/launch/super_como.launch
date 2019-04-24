@@ -1,24 +1,38 @@
 <!-- -*- mode: XML -*- -->
 <launch>
-
-<!-- -*- configuration args -*- -->
-	<!-- elp cameras -->
-	<arg name="usb_cam" default="false" /> <!-- usb or uvc camera driver, choose one -->
-	<arg name="uvc_cam" default="true" /> <!-- usb or uvc camera driver, choose one -->
-	<arg name="show_vid" default="false" /> <!-- show elp camera video using image view -->
-	<arg name="elp_front" default="false" /> <!-- front elp camera --> <!-- set to true --> 
+<!-- -*- Sensor On/Off switches -*- -->
+<!-- elp cameras -->
+	<arg name="elp_front" default="true" /> <!-- front elp camera -->
 	<arg name="elp_back" default="false" /> <!-- back elp camera -->
 	<arg name="elp_right" default="false" /> <!-- right elp camera -->
 	<arg name="elp_left" default="false" /> <!-- left elp camera -->
-	<!-- hokuyo lidar -->
+<!-- hokuyo lidar -->
 	<arg name="hokuyo" default="true" /> <!-- hokuyo lidar -->
-	<!-- teensy circuit -->	
+<!-- teensy circuit -->	
 	<arg name="teensy" default="false" /> <!-- teensy circuit -->
+<!-- imu -->	
+	<arg name="imu" default="true" /> <!-- imu --> <!-- Not implemented yet -->
+<!-- zed camera -->
+	<arg name="zed" default="true" />  <!-- zed camera -->
+<!-- GPS -->
+	<arg name="gps" default="true" /> <!-- GPS -->
+
+
+
+<!-- -*- detailed configuration args -*- -->
+	<!-- elp cameras -->
+	<arg name="show_vid" default="false" /> <!-- show elp camera video using image view -->
+	<arg name="usb_cam" default="false" /> <!-- usb or uvc camera driver, choose one -->
+	<arg name="uvc_cam" default="true" /> <!-- usb or uvc camera driver, choose one -->
+
+	<!-- hokuyo lidar -->
+
+	<!-- teensy circuit -->	
+
 	<!-- imu -->	
-	<arg name="imu" default="true" /> <!-- imu -->
 	<arg name="imu_visualize" default="false"/> <!-- visualize imu -->
+
 	<!-- zed camera -->
-	<arg name="zed" default="false" />  <!-- zed camera --> <!-- set to true -->
 	<arg name="svo_file"              default="" /> <!-- <arg name="svo_file" default="path/to/svo/file.svo"> -->
   <arg name="camera_model"         default="1" /> <!-- 0=ZED, 1=ZEDM-->
   <arg name="serial_number"        default="0" />
@@ -43,6 +57,13 @@
     <arg name="racecar_version" value="$(arg racecar_version)" />
     <arg name="run_camera" value="$(arg run_camera)" />
   </include>
+
+	<!-- gps -->
+	<arg name="gps_port" default="/dev/gps" />
+ 	<arg name="gps_baud" default="4800" />
+	<arg name="gps_frame_id" default="gps" />
+	<arg name="gps_time_ref_source" default="gps" />
+	<arg name="gps_useRMC" default="False" />
 	
 
 
@@ -201,6 +222,17 @@
     <param name="autosize" value="true" />
   </node>
 </group>
+
+
+<!-- -*- GPS -*-  -->
+<node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
+    <param name="port" value="$(arg gps_port)"/>
+    <param name="baud" value="$(arg gps_baud)" />
+    <param name="frame_id" value="$(arg gps_frame_id)" />
+    <param name="time_ref_source" value="$(arg gps_time_ref_source)" />
+    <param name="useRMC" value="$(arg gps_useRMC)" />
+</node>
+
 
 
 </launch>

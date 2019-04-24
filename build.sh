@@ -52,6 +52,12 @@ git submodule init
 git submodule update
 cd $ROOT
 
+# Get nmea navsat GPS drivers package
+cd workspace/src/nmea_navsat_driver
+git submodule init
+git submodule update
+cd $ROOT
+
 # build the workspace
 cd workspace
 catkin_make -DCMAKE_BUILD_TYPE=Release -k

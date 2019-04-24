@@ -20,7 +20,7 @@ from ackermann_msgs.msg import AckermannDriveStamped as ADS
 
 #Objects detected by ZED
 objects = ["stop sign"]
-stoptime = 200
+stoptime = 160
 
 #thresholds for wall tracing
 front_thresh = .87
@@ -186,7 +186,7 @@ class VESCPublisher:
 
 class ZEDFetcher:
     '''
-    Fetches data published to /lidar_data 
+    Fetches data published to /zed_data 
     '''
     def __init__(self):
         self.data_sub = rospy.Subscriber("/darknet_ros/bounding_boxes", BoundingBoxes, self.data_callback, queue_size = 1)
@@ -210,7 +210,8 @@ def main():
                     ctrl_max = ctrl_max, ctrl_min = ctrl_min) # PID controller 
     fetcher = LidarFetcher() # gets lidar data
     publisher = VESCPublisher() # publishes control command to VESC                        
-    
+    timestamp = time.time()
+
     lidardata = fetcher.get_lidardata()
     while lidardata == []: # while lidar data has not been populated
         print("Waiting for Lidar data to populate")
@@ -223,10 +224,10 @@ def main():
     
     zedfetcher = ZEDFetcher()
     detection = zedfetcher.get_zed_data()
-    timestamp = time.time()
     detectedtime = timestamp
-    
+    print("1")
     while not rospy.is_shutdown():
+        print("1.5")
         timestamp = time.time()
         detection = zedfetcher.get_zed_data()
         detected = False
@@ -238,7 +239,7 @@ def main():
                 print("DETECTED ", i.Class, "at ", timestamp)
                 detected = True
                 break
-        
+        print("2")
         ads_msg = ADS()
         lidardata = fetcher.get_lidardata() # get lidar data
         if lidardata == []: # check if lidar data is populated
@@ -261,7 +262,7 @@ def main():
         
         if min_front < front_thresh:
             front_blocked = True
-                
+            print("3")
         if min_front < abs_stop_thresh:
             #motor = 0
             if lidardata.ranges[540] < max_lidar_range:
@@ -314,7 +315,7 @@ def main():
                 motor = default_turn
                 servo = MIN_servo
                 print("leftturn")
-        
+        print("4")
         # populate the message to send to the ESC        
         ads_msg.header.seq+=1
         ads_msg.header.stamp.secs = timestamp
