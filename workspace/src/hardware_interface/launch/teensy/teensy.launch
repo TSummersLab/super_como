@@ -1,0 +1,10 @@
+
+<!-- -*- Teensy -*- -->
+<launch>
+<group ns="teensy">
+<node name="teensy" pkg="rosserial_python" type="serial_node.py" output="screen">
+    <param name="port" value="/dev/teensy"/>
+</node>
+</group>
+</launch>
+

@@ -1,23 +1,25 @@
 <!-- -*- mode: XML -*- -->
 <launch>
 <!-- -*- Sensor On/Off switches -*- -->
-<!-- elp cameras -->
+<!-- elp cameras --> 
 	<arg name="elp_front" default="true" /> <!-- front elp camera -->
 	<arg name="elp_back" default="false" /> <!-- back elp camera -->
 	<arg name="elp_right" default="false" /> <!-- right elp camera -->
 	<arg name="elp_left" default="false" /> <!-- left elp camera -->
 <!-- hokuyo lidar -->
-	<arg name="hokuyo" default="true" /> <!-- hokuyo lidar -->
+	<arg name="hokuyo" default="true" /> <!-- hokuyo lidar -->  
 <!-- teensy circuit -->	
-	<arg name="teensy" default="false" /> <!-- teensy circuit -->
+	<arg name="teensy" default="true" /> <!-- teensy circuit --> 
 <!-- imu -->	
 	<arg name="imu" default="true" /> <!-- imu --> <!-- Not implemented yet -->
 <!-- zed camera -->
-	<arg name="zed" default="true" />  <!-- zed camera -->
+	<arg name="zed" default="true" />  <!-- zed camera --> 
 <!-- GPS -->
-	<arg name="gps" default="true" /> <!-- GPS -->
+	<arg name="gps" default="false" /> <!-- GPS -->
 
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <!-- -*- detailed configuration args -*- -->
 	<!-- elp cameras -->
@@ -49,6 +51,7 @@
   <arg name="odometry_frame"       default="odom" />
   <arg name="two_d_mode"           default="false" /> <!-- if true the Z value will be fixed to "fixed_z_value", roll and pitch to zero -->
   <arg name="fixed_z_value"        default="0.0" />
+
 	<!-- racecar -->
   <arg name="racecar_version" default="racecar-v2" />
   <arg name="run_camera" default="true"/>
@@ -66,8 +69,10 @@
 	<arg name="gps_useRMC" default="False" />
 	
 
-
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!--~~~~~~~~ Starting Nodes ~~~~~~~~~ -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <!-- -*- imu -*- -->
@@ -224,14 +229,17 @@
 </group>
 
 
+
 <!-- -*- GPS -*-  -->
-<node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
-    <param name="port" value="$(arg gps_port)"/>
-    <param name="baud" value="$(arg gps_baud)" />
-    <param name="frame_id" value="$(arg gps_frame_id)" />
-    <param name="time_ref_source" value="$(arg gps_time_ref_source)" />
-    <param name="useRMC" value="$(arg gps_useRMC)" />
-</node>
+<group if="$(arg gps)" ns="gps">
+  <node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
+      <param name="port" value="$(arg gps_port)"/>
+      <param name="baud" value="$(arg gps_baud)" />
+      <param name="frame_id" value="$(arg gps_frame_id)" />
+      <param name="time_ref_source" value="$(arg gps_time_ref_source)" />
+      <param name="useRMC" value="$(arg gps_useRMC)" />
+  </node>
+</group>
 
 
 
