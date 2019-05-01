@@ -1,4 +1,5 @@
 setup/downloads/*.run
 workspace/build/
 workspace/devel/
+*.pyc
 
