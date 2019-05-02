@@ -1,19 +1,6 @@
-<!-- Sleiman Safaoui
-    Feb 15, 2019
-  -->
-
+<?xml version="1.0" encoding="utf-8"?>
 
 <launch>
-
-	
-	<!-- Start the high-level controller for line follower -->
-	<node pkg="control" type="HallNavwithObjDet.py" name="HallNavwithObjDet" output="screen"/>
-        
-
-
-<!---starting Darknet --> 
-
-
   <!-- Console launch prefix -->
   <arg name="launch_prefix" default=""/>
 
@@ -36,9 +23,4 @@
   </node>
 
  <!--<node name="republish" type="republish" pkg="image_transport" output="screen" 	args="compressed in:=/front_camera/image_raw raw out:=/camera/image_raw" /> -->
-
-
-
-
 </launch>
-

@@ -1,0 +1,14 @@
+<launch>
+
+	
+  <!-- Start the high-level controller for line follower -->
+  <node pkg="control" type="HallNavwithObjDet.py" name="HallNavwithObjDet" output="screen"/>
+        
+
+  <!---starting Darknet --> 
+
+  <include file="$(find control)/launch/object_recognition/darknet_ros.launch"/>
+
+
+</launch>
+
