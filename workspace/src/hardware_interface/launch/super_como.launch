@@ -1,6 +1,6 @@
 <!-- -*- mode: XML -*- -->
 <launch>
-<!-- -*- Sensor On/Off switches -*- -->
+<!-- -*- On/Off switches -*- -->
 <!-- elp cameras --> 
 	<arg name="elp_front" default="true" /> <!-- front elp camera -->
 	<arg name="elp_back" default="false" /> <!-- back elp camera -->

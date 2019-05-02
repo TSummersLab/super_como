@@ -1,6 +1,8 @@
 # Super COMO
 Super COMO is an autonomous car platfrom at the University of Texas at Dallas. It is a hardware upgrade over the [COMO platform](https://github.com/TSummersLab/como).
 
+Check out our website [SuperCOMO.com](SuperCOMO.com) for details about car assembly, build, and other guides and tutorials.
+
 ## Installation Guide
 
 Before installing the Super COMO packages, perform a full JetPack installation on the Jetson TX2. For the package, JetPack 3.2.1 was installed. 
@@ -120,11 +122,45 @@ These links should be used in the package (instead of `/dev/ttyUSB*`, `/dev/ttyA
 In `~/super_como/workspace/src/darknet_ros/darknet_ros/config/ros.yaml` change the `topic` parameter under `camera_reading` in `subscribers` to the desired image topic. For example that could be the `/zed/left/image_raw_color` topic if using the ZED or ZED mini cameras. Check the [YOLO github repository](https://github.com/leggedrobotics/darknet_ros/tree/7bc7ec0517b7107712da998f975584c88ed15f77) for more details.
 
 
-# Optional:
+## Operating the Package
+Operating the package is a two step process:
+1. Starting the sensors and hardware
+2. Starting an autonomous feature
+This decoupling allows for easy switching between autonomous features wihtout having to restart all sensor operation
 
-- Setting up team viewer
-- Setting up optional Bluetooth Xbox one controller script
-- bldc tool download, install, and programming vesc
+#### To Start the Sensors and Hardware
+1. Open `super_como/workspace/src/hardware_interface/launch/super_como.launch` and edit the `On/Off Switches` section (and save the changes). 
+	- Setting the default value to `true` will start the component
+	- Setting the default value to `false` will skip starting the component
+2. Run the following in a terminal window:
+```
+roslaunch hardware_interface super_como.launch
+```
+
+The super_como.launch provides an all-in-one solution to starting all hardware components. Nonetheless, individual scripts can be launched. Any of the scripts in `super_como/workspace/src/hardware_interface/launch` or any of the other packages in workspace can be run individually to control a single (or multiple) device(s).
+
+#### To Start an Autonomous Feature
+1. Determine what application to run and edit the `super_como.launch` script to enable all the required sensors.
+2. Run the appropriate launch file from `super_como/workspace/src/control/launch` to perform the desired feature by running the following in a terminal window: 
+```
+roslaunch control <file_name> 
+```
+Here, <file_name> is the desired launch file name.
+
+Some of the autonomous features include the following:
+- `hallway_navigation.launch`: requires the Hokuyo UST-10LX lidar
+- `hallway_nav_wth_object_detection.launch`: requires the Hokuyo UST-10LX lidar and the camera used by `darknet_ros` (yolo) (ZED camear by default)
+- `line_follower.launch`: requires the ZED camera
+- `line_follower_with_lidar.launch`: requires the Hokuyo UST-10LX lidar and the ZED camera
+- `darknet_ros.launch`: requires the camera used by `darknet_ros` (yolo) (ZED camear by default)
+
+Other autonomous driving features can be designed similar to the first four included feature
+
+
+
+
+
+
 
 
 
