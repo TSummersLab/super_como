@@ -1,7 +1,7 @@
 # Super COMO
 Super COMO is an autonomous car platfrom at the University of Texas at Dallas. It is a hardware upgrade over the [COMO platform](https://github.com/TSummersLab/como).
 
-Check out our website [SuperCOMO.com](SuperCOMO.com) for details about car assembly, build, and other guides and tutorials.
+Check out [our website](https://omarkabbas.github.io/supercomo/) for details about car assembly, build, and other guides and tutorials.
 
 ## Installation Guide
 
